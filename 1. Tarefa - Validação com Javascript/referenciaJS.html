@@ -50,18 +50,22 @@
                 <div class="card-body">
                     <div class="row">
                         <div class="col-12">
-                            <label for="forcarObrigatorio"><input type="checkbox" id="forcarObrigatorio" /> Forçar
-                                campos
-                                obrigatórios</label>
+                            <label for="forcarObrigatorio">
+                                <input type="checkbox" id="forcarObrigatorio" onclick="validarObrigatoriedade()" />
+                                Forçar
+                                campos obrigatórios</label>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-lg-6 col-md-12">
                             <label for="nome">Nome</label>
-                            <input type="text" name="nome" id="nome" class="form-control" />
+                            <label class="asterisco"></label>
+                            <input type="text" name="nome" id="nome" class="form-control" minlength/>
+                            <span class="escondido erro" id="nomeErro">O nome é obrigatório</span>
                         </div>
                         <div class="col-lg-6 col-md-12">
                             <label for="sobrenome">Sobrenome</label>
+                            <label class="asterisco"></label>
                             <input type="text" name="sobrenome" id="sobrenome" class="form-control" />
                             <span class="escondido erro" id="sobrenomeErro">O sobrenome é obrigatório</span>
                         </div>
@@ -69,10 +73,12 @@
                     <div class="row">
                         <div class="col-12">
                             <label for="contato">Dados de contato</label>
+                            <label class="asterisco"></label>
                             <input type="text" name="contato" id="contato" class="form-control" />
+                            <span class="escondido erro" id="contatoErro">O contato é obrigatório</span>
                         </div>
                     </div>
-                    <button type="button" class="btn btn-success mt-3" onclick="validar()">Validar</button>
+                    <button type="submit" class="btn btn-success mt-3" onclick="validar()">Validar</button>
                 </div>
             </div>
         </form>
@@ -81,16 +87,59 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js"
         integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13" crossorigin="anonymous">
         </script>
-    <script>
 
+    <script>
+        function validarObrigatoriedade() {
+
+            preencherAsterisco();
+
+            function preencherAsterisco() {
+                var checkbox = document.getElementById("forcarObrigatorio");
+                var asterisco = document.getElementsByClassName("asterisco");
+
+                for (const i in asterisco) {
+                    if (checkbox.checked == true) {
+                        asterisco[i].innerHTML = "*";
+                    } else {
+                        asterisco[i].innerHTML = "";
+                    }
+                }
+            }
+        }
+    </script>
+
+
+    <script>
         function validar() {
             const nome = document.getElementById("nome");
+            const nomeErro = document.getElementById("nomeErro");
             const sobrenomeErro = document.getElementById("sobrenomeErro");
+            const contatoErro = document.getElementById("contatoErro");
+            var checkbox = document.getElementById("forcarObrigatorio");
+            var formControl = document.getElementsByClassName("form-control");
 
             console.log(`O conteúdo da caixinha nome é ${nome.value}`);
 
-            sobrenomeErro.classList.remove("escondido");
-            //sobrenomeErro.classList.add("escondido");
+            if (checkbox.checked == true) {
+                nomeErro.classList.remove("escondido");
+                sobrenomeErro.classList.remove("escondido");
+                contatoErro.classList.remove("escondido");
+
+                for (const i in formControl) {
+                    formControl[i].minlength= 5;
+                    formControl[i].required = true;
+                }
+
+            } else {
+                nomeErro.classList.add("escondido");
+                sobrenomeErro.classList.add("escondido");
+                contatoErro.classList.add("escondido");
+                
+                for (const i in formControl) {
+                    formControl[i].minlength= 0;
+                    formControl[i].required = false;
+                }
+            }
         }
 
     </script>
