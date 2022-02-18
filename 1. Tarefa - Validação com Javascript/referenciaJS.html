@@ -50,26 +50,32 @@
                 <div class="card-body">
                     <div class="row">
                         <div class="col-12">
-                            <label for="forcarObrigatorio"><input type="checkbox" id="forcarObrigatorio" onchange="mudaAsterisco()"/> Forçar
+                            <label for="forcarObrigatorio"><input type="checkbox" id="forcarObrigatorio"
+                                    onchange="mudaAsterisco()" /> Forçar
                                 campos
                                 obrigatórios</label>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-lg-6 col-md-12">
-                            <label for="nome" class="isAsterisco">Nome</label>
-                            <input type="text" name="nome" id="nome" class="form-control" />
+                            <label for="nome" class="titulo">Nome</label>
+                            <label class="obrigatorio escondido">*</label>
+                            <input type="text" name="nome" id="nome" class="form-control" minlength/>
+                            <span class="obrigatorio escondido erro" id="nomeErro">O nome é obrigatório</span>
                         </div>
                         <div class="col-lg-6 col-md-12">
-                            <label for="sobrenome" class="isAsterisco">Sobrenome</label>
+                            <label for="sobrenome" class="titulo">Sobrenome</label>
+                            <label class="obrigatorio escondido">*</label>
                             <input type="text" name="sobrenome" id="sobrenome" class="form-control" />
-                            <span class="escondido erro" id="sobrenomeErro">O sobrenome é obrigatório</span>
+                            <span class="obrigatorio escondido erro" id="sobrenomeErro">O sobrenome é obrigatório</span>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-12">
-                            <label for="contato" class="isAsterisco">Dados de contato</label>
+                            <label for="contato" class="titulo">Dados de contato</label>
+                            <label class="obrigatorio escondido">*</label>
                             <input type="text" name="contato" id="contato" class="form-control" />
+                            <span class="obrigatorio escondido erro" id="contatoErro">O contato é obrigatório</span>
                         </div>
                     </div>
                     <button type="button" class="btn btn-success mt-3" onclick="validar()">Validar</button>
@@ -83,27 +89,30 @@
         </script>
 
     <script>
-        function mudaAsterisco(){
-            let asterisco = document.getElementsByClassName("isAsterisco");
-
-            for (const key in asterisco) {
-                
+        function mudaAsterisco() {
+            let nome = document.getElementById("nome");
+            let obrigatoriedade = document.querySelectorAll('.obrigatorio')
+            for (let key = 0; key < obrigatoriedade.length; key++) {
+                if (obrigatoriedade[key].classList.contains("escondido")) {
+                    obrigatoriedade[key].classList.remove("escondido");
+                    console.log("kkkk")
+                    nome.minlength = "5";
+                } else {
+                    obrigatoriedade[key].classList.add("escondido");
+                }        
             }
-        }
 
+
+        }
 
     </script>
 
     <script>
 
         function validar() {
-            const nome = document.getElementById("nome");
-            const sobrenomeErro = document.getElementById("sobrenomeErro");
 
             console.log(`O conteúdo da caixinha nome é ${nome.value}`);
 
-            sobrenomeErro.classList.remove("escondido");
-            //sobrenomeErro.classList.add("escondido");
         }
 
     </script>
