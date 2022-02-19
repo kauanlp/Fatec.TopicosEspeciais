@@ -51,7 +51,7 @@
                     <div class="row">
                         <div class="col-12">
                             <label for="forcarObrigatorio"><input type="checkbox" id="forcarObrigatorio"
-                                    onchange="mudaAsterisco()" /> Forçar
+                                    onchange="validarObrigatoriedade()" /> Forçar
                                 campos
                                 obrigatórios</label>
                         </div>
@@ -59,26 +59,29 @@
                     <div class="row">
                         <div class="col-lg-6 col-md-12">
                             <label for="nome" class="titulo">Nome</label>
-                            <label class="obrigatorio escondido">*</label>
-                            <input type="text" name="nome" id="nome" class="form-control" minlength/>
-                            <span class="obrigatorio escondido erro" id="nomeErro">O nome é obrigatório</span>
+                            <label class="isAsterisco escondido">*</label>
+                            <input type="text" name="nome" id="nome" class="form-control"
+                                onkeyup="validarObrigatoriedade()" />
+                            <span class="escondido erro" id="nomeErro">O nome é obrigatório</span>
                         </div>
                         <div class="col-lg-6 col-md-12">
                             <label for="sobrenome" class="titulo">Sobrenome</label>
-                            <label class="obrigatorio escondido">*</label>
-                            <input type="text" name="sobrenome" id="sobrenome" class="form-control" />
-                            <span class="obrigatorio escondido erro" id="sobrenomeErro">O sobrenome é obrigatório</span>
+                            <label class="isAsterisco escondido">*</label>
+                            <input type="text" name="sobrenome" id="sobrenome" class="form-control"
+                                onkeyup="validarObrigatoriedade()" />
+                            <span class="escondido erro" id="sobrenomeErro">O sobrenome é obrigatório</span>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col-12">
                             <label for="contato" class="titulo">Dados de contato</label>
-                            <label class="obrigatorio escondido">*</label>
-                            <input type="text" name="contato" id="contato" class="form-control" />
-                            <span class="obrigatorio escondido erro" id="contatoErro">O contato é obrigatório</span>
+                            <label class="isAsterisco escondido">*</label>
+                            <input type="text" name="contato" id="contato" class="form-control"
+                                onkeyup="validarObrigatoriedade()" />
+                            <span class="escondido erro" id="contatoErro">O contato é obrigatório</span>
                         </div>
                     </div>
-                    <button type="button" class="btn btn-success mt-3" onclick="validar()">Validar</button>
+                    <button type="button" class="btn btn-success mt-3" id="botao" onclick="salvar()">Validar</button>
                 </div>
             </div>
         </form>
@@ -89,28 +92,67 @@
         </script>
 
     <script>
-        function mudaAsterisco() {
-            let nome = document.getElementById("nome");
-            let obrigatoriedade = document.querySelectorAll('.obrigatorio')
-            for (let key = 0; key < obrigatoriedade.length; key++) {
-                if (obrigatoriedade[key].classList.contains("escondido")) {
-                    obrigatoriedade[key].classList.remove("escondido");
-                    console.log("kkkk")
-                    nome.minlength = "5";
+        function validarObrigatoriedade() {
+            let erro = document.querySelectorAll('.erro')
+            let isAsterisco = document.querySelectorAll('.isAsterisco');
+            let checkbox = document.getElementById("forcarObrigatorio");
+            let botao = document.getElementById("botao");
+
+            for (let key = 0; key < isAsterisco.length; key++) {
+                if (checkbox.checked) {
+                    isAsterisco[key].classList.remove("escondido");
+                    validarEscreveu(erro);
+                    minimoCaracteres("nomeErro", "nome", 5);
+                    alphanumeric("contatoErro","contato");
                 } else {
-                    obrigatoriedade[key].classList.add("escondido");
-                }        
+                    isAsterisco[key].classList.add("escondido");
+                    erro[key].classList.add("escondido");
+                    botao.disabled = false;
+                }
             }
+        }
 
+        function validarEscreveu(erro) {
+            let formControl = document.querySelectorAll('.form-control')
 
+            for (let key = 0; key < erro.length; key++) {
+                if (formControl[key].value == "") {
+                    erro[key].classList.remove("escondido");
+                    botao.disabled = true;
+  
+                } else {
+                    erro[key].classList.add("escondido");
+                    botao.disabled = false;
+                }
+            }
+        }
+
+        function minimoCaracteres(idSpan, idInput, qtdMinima) {
+            let erroId = document.getElementById(idSpan);
+            let nome = document.getElementById(idInput);
+
+            if (nome.value.length < qtdMinima) {
+                erroId.classList.remove("escondido");
+                botao.disabled = true;
+            }
+        }
+
+        function alphanumeric(idSpan, idInput) {
+            var letters = /[^A-Za-z0-9]+/;
+            let erroId = document.getElementById(idSpan);
+            let nome = document.getElementById(idInput);
+            
+            if (nome.value.match(letters)) {
+                erroId.classList.remove("escondido");
+                botao.disabled = true;
+            }
         }
 
     </script>
 
     <script>
 
-        function validar() {
-
+        function salvar() {
             console.log(`O conteúdo da caixinha nome é ${nome.value}`);
 
         }
