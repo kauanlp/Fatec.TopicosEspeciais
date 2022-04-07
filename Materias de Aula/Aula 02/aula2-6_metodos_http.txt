@@ -1,0 +1,25 @@
+Métodos (verbos) HTTP
+=====================
+
+https://developer.mozilla.org/pt-BR/docs/Web/HTTP/Methods
+
+Como o dado é passado e onde pode ser usado
+
+GET: acesso por digitação de endereço, clique de link.
+     dados passados via URL (?parametro1=valor&parametro2=valor&parametro3=valor)
+     por serem passados via URL, há um limite no volume de dados que pode ser passado
+
+POST: pode ser enviado por meio de formulário ou código JS
+      dados são passados como corpo da requisição (não na URL)
+      por serem passados no corpo, o limite de dados é muito mais flexível
+      além disso, pode também passar parâmetros via URL
+
+Estes dois são os únicos que você pode usar no 'method' de formulários HTML
+
+PUT: equivalente ao POST
+DELETE: equivalente ao POST
+PATCH: equivalente ao POST
+
+(outros)
+HEAD: Deseja receber só o cabeçalho da resposta
+...

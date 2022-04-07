@@ -1,0 +1,30 @@
+PROBLEMAS COM A SOLUÇÃO ATUAL
+=============================
+
+* Não há tratamento de dados;
+* Não há tratamento adequado de exceções;
+* Se for público, precisaria de CAPTCHA;
+* Usa HTTP, mas deveria usar HTTPS.
+
+-x-
+
+* Mistura código de front (HTML/CSS/JS) e back (Java):
+    - dificultando o trabalho paralelo;
+    - dificultando a separação de conhecimentos.
+
+* Difícil dar manutenção, pois o mesmo código se repete várias vezes em vários lugares diferentes;
+
+* Difícil de reutilizar, pois as partes todas estão no mesmo lugar;
+
+* Diferentes perfis acabando sabendo coisas que não precisam/devem saber (acoplamento/encapsulamento);
+
+* São abertas e fechadas conexões em cada página.
+
+1o PASSO: PENSAR EM CAMADAS
+===========================
+
+Layers: lógica (código);
+Tiers: físico (dispositivos).
+
+Primeira consideração: front e back
+Segunda consideração: front e (subdivisão do back)
