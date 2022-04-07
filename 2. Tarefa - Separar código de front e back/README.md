@@ -1,0 +1,1 @@
+Separar código de front e back (dentro do possível) para as funcionalidades de inserção, exclusão e alteração (consulta já foi feito). Usar como base o projeto aula5-1_topicos_backend2_parcial.zip, na pasta de Materiais de aula
