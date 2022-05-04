@@ -1,4 +1,4 @@
-package com.topicos.forum;
+package com.topicos.forum.dominio;
 
 import lombok.Data;
 
