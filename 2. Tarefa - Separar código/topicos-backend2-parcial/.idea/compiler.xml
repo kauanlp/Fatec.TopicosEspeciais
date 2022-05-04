@@ -6,11 +6,8 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="topicos-backend2" />
+        <module name="topicos-backend1" />
       </profile>
     </annotationProcessing>
-    <bytecodeTargetLevel>
-      <module name="topicos-backend2" target="1.8" />
-    </bytecodeTargetLevel>
   </component>
 </project>
