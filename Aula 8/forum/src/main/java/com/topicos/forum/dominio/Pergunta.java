@@ -14,12 +14,29 @@ import java.util.List;
 @AllArgsConstructor
 @Tabela(nome = "perguntas")
 public class Pergunta extends DomainEntity {
+    @Coluna(nome = "titulo")
+    private String titulo;
 
     @Coluna(nome = "descricao")
     private String descricao;
 
+    private List<Resposta> respostas;
+
     public Pergunta(int id, String descricao, Date dtCadastro) {
         super(id, dtCadastro);
+        this.descricao = descricao;
+    }
+
+    public Pergunta(int id, String descricao) {
+        super(id);
+        this.descricao = descricao;
+    }
+
+    public Pergunta(int id) {
+        super(id);
+    }
+
+    public Pergunta(String descricao) {
         this.descricao = descricao;
     }
 

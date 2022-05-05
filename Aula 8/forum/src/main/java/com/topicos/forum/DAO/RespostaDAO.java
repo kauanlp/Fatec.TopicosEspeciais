@@ -5,7 +5,7 @@ import com.topicos.forum.dominio.Pergunta;
 import java.sql.SQLException;
 import java.util.List;
 
-public interface PerguntaDAO {
+public interface RespostaDAO {
 
     void salvar(Pergunta pergunta) throws ClassNotFoundException, SQLException;
 
