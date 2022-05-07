@@ -23,4 +23,7 @@ public class DomainEntity {
         this.id = id;
         this.dtCadastro = dtCadastro;
     }
+    public DomainEntity(Date dtCadastro){
+        this.dtCadastro = dtCadastro;
+    }
 }

@@ -30,11 +30,13 @@
                     for (Pergunta pergunta : perguntas) {
                 %>
                 <div class="card-header">
-                    Pergunta <%=pergunta.getId()%>
+                    <%=pergunta.getId()%> - <%=pergunta.getTitulo()%>
                 </div>
                 <div class="card-body">
                     <%--                <h5 class="card-title">Special title treatment</h5>--%>
                     <p class="card-text"><%= pergunta.getDescricao()%>
+                    </p>
+                    <p class="card-text">Publicado em <%= pergunta.getDtCadastro()%>
                     </p>
                 </div>
                 <%

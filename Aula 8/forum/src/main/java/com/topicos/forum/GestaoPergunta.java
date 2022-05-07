@@ -3,6 +3,7 @@ package com.topicos.forum;
 import com.topicos.forum.DAO.FabricaDAO;
 import com.topicos.forum.DAO.PerguntaDAO;
 import com.topicos.forum.dominio.Pergunta;
+import com.topicos.forum.dominio.Resposta;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -10,6 +11,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.Date;
+import java.util.List;
 
 public class GestaoPergunta extends HttpServlet {
     public void service(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
@@ -28,8 +31,9 @@ public class GestaoPergunta extends HttpServlet {
             try {
                 String titulo = request.getParameter("titulo");
                 String descricao = request.getParameter("descricao");
+                Date dtCadastro = new Date();
 
-                Pergunta pergunta = new Pergunta(descricao);
+                Pergunta pergunta = new Pergunta(titulo, descricao, dtCadastro);
                 perguntaDAO.salvar(pergunta);
 
                 request.getRequestDispatcher("/sucessoInsercao.jsp").forward(request, response);
@@ -54,8 +58,8 @@ public class GestaoPergunta extends HttpServlet {
                 int id = Integer.valueOf(idStr);
                 String titulo = request.getParameter("titulo");
                 String descricao = request.getParameter("descricao");
-
-                Pergunta pergunta = new Pergunta(id, descricao);
+                Date dtCadastro = new Date();
+                Pergunta pergunta = new Pergunta(id, titulo, descricao, dtCadastro);
                 perguntaDAO.atualizar(pergunta);
 
                 request.getRequestDispatcher("/sucessoAtualizacao.jsp").forward(request, response);

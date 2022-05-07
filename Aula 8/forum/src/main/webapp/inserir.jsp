@@ -13,6 +13,8 @@
         <div class="offset-lg-3 col-lg-6">
             <h1>Inserir pergunta</h1>
             <form action="pergunta" method="post">
+                <label for="titulo">Título:</label>
+                <input type="text" name="titulo" id="titulo" class="form-control" />
                 <label for="descricao">Descrição:</label>
                 <input type="text" name="descricao" id="descricao" class="form-control" />
                 <button class="btn btn-primary" name="acao" value="inserir">Cadastrar</button>

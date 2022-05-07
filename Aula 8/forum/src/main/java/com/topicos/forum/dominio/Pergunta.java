@@ -6,7 +6,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.sql.Date;
+import java.util.Date;
 import java.util.List;
 
 @Data
@@ -20,15 +20,11 @@ public class Pergunta extends DomainEntity {
     @Coluna(nome = "descricao")
     private String descricao;
 
-    private List<Resposta> respostas;
+   // private List<Resposta> respostas;
 
-    public Pergunta(int id, String descricao, Date dtCadastro) {
+    public Pergunta(int id, String titulo, String descricao, Date dtCadastro) {
         super(id, dtCadastro);
-        this.descricao = descricao;
-    }
-
-    public Pergunta(int id, String descricao) {
-        super(id);
+        this.titulo = titulo;
         this.descricao = descricao;
     }
 
@@ -36,9 +32,13 @@ public class Pergunta extends DomainEntity {
         super(id);
     }
 
-    public Pergunta(String descricao) {
+    public Pergunta(String titulo, String descricao, Date dtCadastro) {
+        super(dtCadastro);
+        this.titulo = titulo;
         this.descricao = descricao;
     }
+
+
 
 //    @Coluna(nome = "topicos")
 //    private List<Topico> topicos;
