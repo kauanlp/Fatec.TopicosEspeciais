@@ -38,7 +38,14 @@ public class Pergunta extends DomainEntity {
         this.descricao = descricao;
     }
 
+<<<<<<< Updated upstream
 
+=======
+    public Pergunta(int id, String descricao) {
+        super(id);
+        this.descricao = descricao;
+    }
+>>>>>>> Stashed changes
 
 //    @Coluna(nome = "topicos")
 //    private List<Topico> topicos;
