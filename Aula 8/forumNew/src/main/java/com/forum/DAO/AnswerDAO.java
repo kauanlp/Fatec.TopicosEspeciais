@@ -18,4 +18,6 @@ public interface AnswerDAO {
     List<Answer> findAll() throws ClassNotFoundException, SQLException;
 
     Answer findOne(int id) throws ClassNotFoundException, SQLException;
+
+    List<Answer> findAllByQuestionId(int id) throws ClassNotFoundException, SQLException;
 }

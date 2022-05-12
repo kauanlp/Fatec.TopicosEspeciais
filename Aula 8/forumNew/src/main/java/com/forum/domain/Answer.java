@@ -22,4 +22,8 @@ public class Answer extends DomainEntity{
         this.description = description;
     }
 
+    public Answer(String description, Question question) {
+        this.description = description;
+        this.question = question;
+    }
 }

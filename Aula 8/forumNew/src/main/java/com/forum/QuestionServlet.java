@@ -3,6 +3,7 @@ package com.forum;
 import com.forum.DAO.AnswerDAO;
 import com.forum.DAO.FactoryDAO;
 import com.forum.DAO.QuestionDAO;
+import com.forum.domain.Answer;
 import com.forum.domain.Question;
 
 import javax.servlet.ServletException;
@@ -44,11 +45,24 @@ public class QuestionServlet extends HttpServlet {
                 String idStr = request.getParameter("questionId");
                 int id = Integer.valueOf(idStr);
                 request.setAttribute("question", questionDAO.findOne(id));
-                request.setAttribute("answers", answerDAO.findAll());
+                request.setAttribute("answers", answerDAO.findAllByQuestionId(id));
                 request.getRequestDispatcher("/listAnswers.jsp").forward(request, response);
             } catch (SQLException | ClassNotFoundException e) {
                 request.setAttribute("mensagem", e.getMessage());
                 request.getRequestDispatcher("/listAnswers.jsp").forward(request, response);
+            }
+        } else if (action.equalsIgnoreCase("saveAnswer")) {
+            try {
+                String description = request.getParameter("description");
+                String idStr = request.getParameter("questionId");
+                int id = Integer.valueOf(idStr);
+                Question question = questionDAO.findOne(id);
+                Answer answer = new Answer(description, question);
+                answerDAO.save(answer);
+                request.getRequestDispatcher("/sucessSaveAnswer.jsp").forward(request, response);
+            } catch (SQLException | ClassNotFoundException e) {
+                request.setAttribute("mensagem", e.getMessage());
+                request.getRequestDispatcher("/failSaveAnswer.jsp").forward(request, response);
             }
         }
     }

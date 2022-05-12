@@ -84,5 +84,23 @@ public class AnswerDAOPostgresSQL implements AnswerDAO {
             }
             return answer;
         }
+
+    }
+
+    @Override
+    public List<Answer> findAllByQuestionId(int id) throws ClassNotFoundException, SQLException {
+        try (Connection connection = Database.getConnection()) {
+            PreparedStatement sql = connection.prepareStatement("SELECT awr_id, awr_description, awr_qti_id FROM _answers WHERE awr_qti_id=?");
+            sql.setInt(1, id);
+            ResultSet resultado = sql.executeQuery();
+            List<Answer> answers = new ArrayList<>();
+            while (resultado.next()) {
+                Answer answer = new Answer(resultado.getInt("awr_id"),
+                        resultado.getString("awr_description"),
+                        questionDAO.findOne(resultado.getInt("awr_qti_id")));
+                answers.add(answer);
+            }
+            return answers;
+        }
     }
 }
